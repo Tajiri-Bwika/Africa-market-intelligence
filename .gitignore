@@ -1,0 +1,11 @@
+__pycache__/
+.pytest_cache/
+.streamlit/
+.venv/
+.env
+CODEX_PROMPTS.md
+docs/
+.DS_Store
+outputs/*.csv
+*.pyc
+
