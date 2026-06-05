@@ -15,7 +15,12 @@ def test_segment_countries_adds_profile_labels_and_coordinates():
             "population_growth_pct": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         }
     )
-    segmented = segment_countries(features)
-    assert {"cluster_id", "segment", "pca_1", "pca_2"}.issubset(segmented.columns)
+    segmented, metrics = segment_countries(features)
+    assert {"cluster_id", "segment", "pca_1", "pca_2", "silhouette"}.issubset(segmented.columns)
     assert segmented["segment"].notna().all()
     assert segmented["segment"].nunique() == 5
+    
+    # Verify validation metrics
+    assert "silhouette_score" in metrics
+    assert "quality_assessment" in metrics
+    assert "cluster_sizes" in metrics
